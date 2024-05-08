@@ -14,7 +14,7 @@ router.get("/fetchalltasks", async (req, res) => {
   }
 });
 
-// ROUTE 2: Add a new Note using: POST "/api/notes/addnote". Login required
+// ROUTE 2: Add a new task using: POST "/api/tasks/addtask"
 router.post(
   "/addtask",
   [
@@ -45,5 +45,21 @@ router.post(
     }
   }
 );
+
+// ROUTE 3: Delete an existing task using: DELETE "/api/tasks/deletetask"
+router.delete("/deletetask/:id", async (req, res) => {
+  try {
+    let task = await Task.findById(req.params.id);
+    if (!task) {
+      return res.status(404).send("Not Found");
+    }
+
+    task = await Task.findByIdAndDelete(req.params.id);
+    res.json({ Success: "Note has been deleted", task: task });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 module.exports = router;
