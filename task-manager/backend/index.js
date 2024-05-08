@@ -1,13 +1,13 @@
-const connectToMongo = require('./db.cjs')
+const connectToMongo = require("./db.cjs");
 connectToMongo();
-const express = require('express')
-const app = express()
-const port = 4000
+const express = require("express");
+const app = express();
+const port = 4000;
 
-app.get('/', (req, res) => {
-  res.send('Hail MoonFace')
-})
+app.use(express.json())
+
+app.use("/api/tasks", require("./routes/tasks"));
 
 app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`)
-})
+  console.log(`Example app listening on port http://localhost:${port}`);
+});
