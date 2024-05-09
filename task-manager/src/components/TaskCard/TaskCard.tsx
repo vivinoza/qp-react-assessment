@@ -29,14 +29,16 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     <div
       className={isCompleted ? "completed task-card-body" : "task-card-body"}
     >
-      <input
-        type="checkbox"
-        checked={isCompleted}
-        onChange={handleCheckboxChange}
-      />
-      <div className="task-card-title">{task.title}</div>
+      <div className="task-card-header">
+        <input
+          type="checkbox"
+          checked={isCompleted}
+          onChange={handleCheckboxChange}
+        />
+        <div className="task-card-title">{task.title}</div>
+      </div>
       <div className="task-card-description">{task.description}</div>
-      <div onClick={handleDelete}>Click here to delete</div>
+      <i className="fa-solid fa-trash" onClick={handleDelete}></i>
     </div>
   );
 };
