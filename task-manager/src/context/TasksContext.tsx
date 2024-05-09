@@ -44,10 +44,7 @@ export const TasksPageContextProvider = (props: any) => {
     [host]
   );
 
-  // export const updateStatus = useCallback(() => {}, []);
-
   const updateStatus = async (completed: boolean, id: string) => {
-    // API Call
     const response = await fetch(`${host}/api/tasks/updatestatus/${id}`, {
       method: "PUT",
       headers: {
