@@ -24,7 +24,7 @@ router.get("/fetchalltasks", async (req, res) => {
 router.post(
   "/addtask",
   [
-    body("title", "Enter a valid title").isLength({ min: 3 }),
+    body("title", "Enter a valid title"),
     body("description", "Enter a valid description"),
   ],
   async (req, res) => {
@@ -65,7 +65,7 @@ router.delete("/deletetask/:id", async (req, res) => {
   }
 });
 
-// ROUTE 3: Update an existing Task using: PUT "/api/tasks/updatestatus"
+// ROUTE 4: Update an existing Task using: PUT "/api/tasks/updatestatus"
 router.put('/updatestatus/:id', async (req, res) => {
   const { completed } = req.body;
   try {
