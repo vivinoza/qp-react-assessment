@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 
 const Home = () => {
   const { getTasks, tasks, isLoading } = useTask();
+  const [formPage, setFormPage] = useState<boolean>(false);
   const [page, setPage] = useState(1);
   const limit = 20;
 
@@ -23,6 +24,10 @@ const Home = () => {
     }
   }, [isLoading]);
 
+  const openForm = () => {
+    setFormPage(!formPage);
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -32,8 +37,8 @@ const Home = () => {
 
   return (
     <>
-      <Header />
-      <AddTask />
+      <Header openForm={openForm} />
+      {formPage && <AddTask />}
       <div className="all-tasks-page">
         {tasks.map((task) => (
           <TaskCard key={task._id} task={task} />

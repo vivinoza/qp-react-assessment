@@ -6,12 +6,25 @@
   background: #7ffcfc;
   height: 50px;
   margin-bottom: 30px;
-}
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px 0 20px;
 
-.header-for-tasks-text {
-  text-align: center;
-  line-height: 50px;
-  vertical-align: middle;
-  font-weight: 700;
-  font-size: 30px;
+  .add-new-task-button {
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .header-for-tasks-text {
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    font-weight: 700;
+    font-size: 30px;
+  }
 }
