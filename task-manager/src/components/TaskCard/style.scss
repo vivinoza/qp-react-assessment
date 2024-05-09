@@ -1,0 +1,33 @@
+.completed {
+  background-color: #77ff6b !important;
+}
+
+.task-card-body {
+  width: 200px;
+  height: 250px;
+  background-color: #ffff6b;
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+  .task-card-title {
+    font-weight: 700;
+  }
+  .task-card-description {
+    margin-top: 10px;
+    height: 225px;
+    overflow: auto;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}

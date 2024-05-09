@@ -5,10 +5,12 @@ const initialValue: {
   getTasks: (page: number, limit: number) => void;
   tasks: Task[];
   isLoading: boolean;
+  updateStatus: (completed: boolean, id: string) => void;
 } = {
   getTasks: () => {},
   tasks: [],
   isLoading: false,
+  updateStatus: () => {},
 };
 
 const TasksPageContext = createContext({ ...initialValue });
@@ -42,8 +44,25 @@ export const TasksPageContextProvider = (props: any) => {
     [host]
   );
 
+  // export const updateStatus = useCallback(() => {}, []);
+
+  const updateStatus = async (completed: boolean, id: string) => {
+    // API Call
+    const response = await fetch(`${host}/api/tasks/updatestatus/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ completed }),
+    });
+
+    return response.json();
+  };
+
   return (
-    <TasksPageContext.Provider value={{ getTasks, tasks, isLoading }}>
+    <TasksPageContext.Provider
+      value={{ getTasks, tasks, isLoading, updateStatus }}
+    >
       {props.children}
     </TasksPageContext.Provider>
   );

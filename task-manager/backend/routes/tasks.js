@@ -29,7 +29,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { title, description } = req.body;
+      const { title, description, completed } = req.body;
 
       const errors = validationResult(req);
 
@@ -40,6 +40,7 @@ router.post(
       const task = new Task({
         title,
         description,
+        completed
       });
 
       const savedTask = await task.save();
@@ -56,10 +57,6 @@ router.post(
 router.delete("/deletetask/:id", async (req, res) => {
   try {
     let task = await Task.findById(req.params.id);
-    if (!task) {
-      return res.status(404).send("Not Found");
-    }
-
     task = await Task.findByIdAndDelete(req.params.id);
     res.json({ Success: "Note has been deleted", task: task });
   } catch (error) {
@@ -67,5 +64,19 @@ router.delete("/deletetask/:id", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// ROUTE 3: Update an existing Task using: PUT "/api/tasks/updatestatus"
+router.put('/updatestatus/:id', async (req, res) => {
+  const { completed } = req.body;
+  try {
+      let task = await Task.findById(req.params.id);
+
+      task = await Task.findByIdAndUpdate(req.params.id, { completed: completed }, { new: true })
+      res.json({ task });
+  } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal Server Error");
+  }
+})
 
 module.exports = router;

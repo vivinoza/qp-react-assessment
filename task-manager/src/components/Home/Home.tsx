@@ -1,6 +1,7 @@
 import { useTask } from "../../context/TasksContext";
-
 import { memo, useCallback, useEffect, useState } from "react";
+import TaskCard from "../TaskCard/TaskCard";
+import "./style.scss";
 
 const Home = () => {
   const { getTasks, tasks, isLoading } = useTask();
@@ -12,33 +13,26 @@ const Home = () => {
   }, [getTasks, page]);
 
   const handleScroll = useCallback(() => {
-    // Check if user has scrolled near the bottom of the page
     const scrollPosition = window.innerHeight + window.scrollY;
     const scrollBottom = document.body.offsetHeight;
 
     if (scrollPosition >= scrollBottom - 100 && !isLoading) {
-      setPage((prevPage) => prevPage + 1); // Increment the page to fetch more tasks
+      setPage((prevPage) => prevPage + 1);
     }
   }, [isLoading]);
 
-  // Add scroll event listener
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Cleanup event listener
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
 
   return (
-    <div>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task._id}>
-            <h3>{task.title}</h3>
-            <p>{task.description}</p>
-          </li>
-        ))}
-      </ul>
+    <div className="all-tasks-page">
+      {tasks.map((task) => (
+        <TaskCard key={task._id} task={task} />
+      ))}
       {isLoading && <p>Loading more tasks...</p>}
     </div>
   );
