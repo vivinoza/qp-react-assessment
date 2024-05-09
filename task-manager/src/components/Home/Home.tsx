@@ -2,6 +2,8 @@ import { useTask } from "../../context/TasksContext";
 import { memo, useCallback, useEffect, useState } from "react";
 import TaskCard from "../TaskCard/TaskCard";
 import "./style.scss";
+import AddTask from "../AddTask/AddTask";
+import Header from "../Header/Header";
 
 const Home = () => {
   const { getTasks, tasks, isLoading } = useTask();
@@ -29,12 +31,16 @@ const Home = () => {
   }, [handleScroll]);
 
   return (
-    <div className="all-tasks-page">
-      {tasks.map((task) => (
-        <TaskCard key={task._id} task={task} />
-      ))}
-      {isLoading && <p>Loading more tasks...</p>}
-    </div>
+    <>
+      <Header />
+      <AddTask />
+      <div className="all-tasks-page">
+        {tasks.map((task) => (
+          <TaskCard key={task._id} task={task} />
+        ))}
+        {isLoading && <p>Loading more tasks...</p>}
+      </div>
+    </>
   );
 };
 

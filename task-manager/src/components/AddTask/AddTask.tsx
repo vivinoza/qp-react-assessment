@@ -1,12 +1,46 @@
+import React, { useState } from "react";
 import { useTask } from "../../context/TasksContext";
+import './style.scss'
 
 const AddTask = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const { addTask } = useTask();
 
-  const handleClick = () => {
-    addTask("test5", "test5");
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    addTask(title, description);
+
+    setTitle("");
+    setDescription("");
   };
-  return <div onClick={handleClick}>click here to add</div>;
+
+  return (
+    <form onSubmit={handleSubmit} className="form-container">
+      <div>
+        <label htmlFor="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Description:</label>
+        <input
+          type="text"
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Add Task</button>
+    </form>
+  );
 };
 
 export default AddTask;
