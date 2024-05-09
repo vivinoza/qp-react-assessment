@@ -8,32 +8,35 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
-  const { updateStatus } = useTask();
-  const [completedStatus, setCompletedStatus] = useState<boolean>(false);
-  const [clicked, setClicked] = useState<boolean>(false);
-  const [cardBackground, setCardBackground] =
-    useState<string>("task-card-body");
+  const { updateStatus, deleteTask } = useTask();
+  const [isCompleted, setIsCompleted] = useState(task.completed || false);
 
-  const handleClick = (completed: boolean, id: string) => {
-    setCompletedStatus(!completedStatus);
-    setClicked(!clicked);
-    updateStatus(completed, task._id);
+  const handleCheckboxChange = () => {
+    setIsCompleted(!isCompleted);
+    updateStatus(!isCompleted, task._id);
   };
 
-  useEffect(() => {
-    if (task.completed) {
-      setCompletedStatus(!completedStatus);
-      setCardBackground("completed task-card-body");
-    } else setCardBackground("task-card-body");
-  }, [task.completed]);
+  const handleDelete = () => {
+    const confirm = window.confirm(
+      "Are you sure you want to delete this task?"
+    );
+    if (confirm) {
+      deleteTask(task._id);
+    }
+  };
 
   return (
     <div
-      className={task.completed ? "completed task-card-body" : cardBackground}
-      onClick={() => handleClick(!completedStatus, task._id)}
+      className={isCompleted ? "completed task-card-body" : "task-card-body"}
     >
+      <input
+        type="checkbox"
+        checked={isCompleted}
+        onChange={handleCheckboxChange}
+      />
       <div className="task-card-title">{task.title}</div>
       <div className="task-card-description">{task.description}</div>
+      <div onClick={handleDelete}>Click here to delete</div>
     </div>
   );
 };
