@@ -6,7 +6,13 @@ const { body, validationResult } = require("express-validator");
 // ROUTE 1: Get All the Tasks using: GET "/api/tasks/fetchalltasks"
 router.get("/fetchalltasks", async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+
+    const skip = (page - 1) * limit;
+
+    const tasks = await Task.find().skip(skip).limit(limit);
+
     res.json(tasks);
   } catch (error) {
     console.error(error.message);
