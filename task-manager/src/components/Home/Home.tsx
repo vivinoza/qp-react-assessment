@@ -38,13 +38,20 @@ const Home = () => {
   return (
     <>
       <Header openForm={openForm} />
-      {formPage && <AddTask />}
-      <div className="all-tasks-page">
-        {tasks.map((task) => (
-          <TaskCard key={task._id} task={task} />
-        ))}
-        {isLoading && <p>Loading more tasks...</p>}
-      </div>
+      {formPage && <AddTask openForm={openForm}/>}
+      {tasks.length !== 0 && (
+        <div className="all-tasks-page">
+          {tasks.map((task) => (
+            <TaskCard key={task._id} task={task} />
+          ))}
+          {isLoading && <p>Loading more tasks...</p>}
+        </div>
+      )}
+      {tasks.length === 0 && !isLoading && !formPage && (
+        <div className="all-tasks-page">
+          No tasks found. Please add a new task.
+        </div>
+      )}
     </>
   );
 };

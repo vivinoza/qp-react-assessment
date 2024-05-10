@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useTask } from "../../context/TasksContext";
-import './style.scss'
+import "./style.scss";
 
-const AddTask = () => {
+interface AddTaskProps {
+  openForm: () => void;
+}
+
+const AddTask: React.FC<AddTaskProps> = ({ openForm }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { addTask } = useTask();
@@ -11,7 +15,7 @@ const AddTask = () => {
     e.preventDefault();
 
     addTask(title, description);
-
+    openForm();
     setTitle("");
     setDescription("");
   };

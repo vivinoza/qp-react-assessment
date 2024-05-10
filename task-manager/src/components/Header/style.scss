@@ -3,7 +3,7 @@
   top: 0;
   z-index: 100;
   box-shadow: 0px 4px 2px -2px gray;
-  background: #7ffcfc;
+  background: #889f9f;
   height: 50px;
   margin-bottom: 30px;
   display: flex;
@@ -12,6 +12,7 @@
   padding: 0px 20px 0 20px;
 
   .add-new-task-button {
+    color: #292828;
     background-color: transparent;
     border: none;
     font-weight: 600;
@@ -21,6 +22,7 @@
   }
 
   .header-for-tasks-text {
+    color: #292828;
     text-align: center;
     line-height: 50px;
     vertical-align: middle;

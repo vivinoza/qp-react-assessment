@@ -1,11 +1,11 @@
 .completed {
-  background-color: #77ff6b !important;
+  background-color: #6baf9b !important;
 }
 
 .task-card-body {
   width: 200px;
   height: 250px;
-  background-color: #ffff6b;
+  background-color: #f3e5ab;
   padding: 20px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -16,10 +16,13 @@
     gap: 10px;
     align-items: flex-end;
     .task-card-title {
+      color: #292828;
       font-weight: 700;
     }
   }
   .task-card-description {
+    font-weight: 500;
+    color: #292828;
     margin-top: 10px;
     height: 205px;
     overflow: auto;
