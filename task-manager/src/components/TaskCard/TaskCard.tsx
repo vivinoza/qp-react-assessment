@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Task } from "../../types/taskType";
 import "./style.scss";
 import { useTask } from "../../context/TasksContext";
